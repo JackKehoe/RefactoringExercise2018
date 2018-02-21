@@ -1,6 +1,5 @@
 package bankexercise;
 
-
 public class BankAccount {
 	
 	private int accountID;
@@ -11,7 +10,6 @@ public class BankAccount {
 	private double balance;
 	private double overdraft;
 	
-	public static int count = 0;
 	
 	public BankAccount(int accountID, String accountNumber, String surname, String firstName, String accountType, double balance, double overdraft){
 		this.accountID = accountID;
@@ -22,13 +20,7 @@ public class BankAccount {
 		this.balance = balance;
 		this.overdraft = overdraft;
 	}
-	
-	public BankAccount(){
-		this(0, "", "", "", "", 0.0, 0.0);
-	}
-	
-	
-	
+
 	public int getAccountID() {
 		return accountID;
 	}
@@ -59,14 +51,6 @@ public class BankAccount {
 	
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
-	}
-	
-	public void setAccType(String accType){
-		accType = accType;
-	}
-	
-	public String getAccType(){
-		return accountType;
 	}
 	
 	public String getFirstName() {
