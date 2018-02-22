@@ -1,26 +1,19 @@
 package bankexercise;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
+import java.util.*;
 import javax.swing.*;
-
 import net.miginfocom.swing.MigLayout;
 
 public class CreateBankDialog extends JFrame {
 
 	private final static int TABLE_SIZE = 29;
-	Random rand = new Random();
+	private final Random rand = new Random();
 
-	ArrayList<BankAccount> accountList;
 
-	HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
+	private HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
 
 	public void put(int key, BankAccount value) {
 		int hash = (key % TABLE_SIZE);
@@ -34,11 +27,10 @@ public class CreateBankDialog extends JFrame {
 	// Constructor code based on that for the Create and Edit dialog classes in the
 	// Shapes exercise.
 
-	 JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel,
+	 private JLabel accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel,
 			overdraftLabel;
 
-	JComboBox comboBox;
-	JTextField accountNumberTextField;
+	private JTextField accountNumberTextField;
 	final JTextField firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
 
 	CreateBankDialog(HashMap<Integer, BankAccount> accounts) {
@@ -53,10 +45,7 @@ public class CreateBankDialog extends JFrame {
 
 		String[] comboTypes = { "Current", "Deposit" };
 
-		final JComboBox comboBox = new JComboBox(comboTypes);
-
-		accountNumberLabel = new JLabel("Photograph file name: ");
-		accountNumberTextField = new JTextField(15);
+		final JComboBox<String> comboBox = new JComboBox<String>(comboTypes);
 
 		accountNumberLabel = new JLabel("Account Number: ");
 		accountNumberTextField = new JTextField(15);
@@ -104,9 +93,9 @@ public class CreateBankDialog extends JFrame {
 
 		add(dataPanel, BorderLayout.CENTER);
 
-		JPanel buttonPanel = new JPanel(new FlowLayout());
-		JButton addButton = new JButton("Add");
-		JButton cancelButton = new JButton("Cancel");
+		final JPanel buttonPanel = new JPanel(new FlowLayout());
+		final JButton addButton = new JButton("Add");
+		final JButton cancelButton = new JButton("Cancel");
 
 		buttonPanel.add(addButton);
 		buttonPanel.add(cancelButton);
@@ -116,19 +105,17 @@ public class CreateBankDialog extends JFrame {
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				String accountNumber = accountNumberTextField.getText();
+				final String accountNumber = accountNumberTextField.getText();
 
-				String surname = surnameTextField.getText();
-				String firstName = firstNameTextField.getText();
+				final String surname = surnameTextField.getText();
+				final String firstName = firstNameTextField.getText();
 
-				String accountType = comboBox.getSelectedItem().toString();
+				final String accountType = comboBox.getSelectedItem().toString();
 
 
-				if (accountNumber != null && accountNumber.length() == 8 && surname != null && firstName != null
-						&& accountType != null) {
+				if (accountNumber != null && accountNumber.length() == 8 && surname != null && firstName != null) {
 					try {
 
-						boolean idTaken = false;
 						boolean accNumTaken = false;
 
 						int randNumber = rand.nextInt(24) + 1;
@@ -136,7 +123,6 @@ public class CreateBankDialog extends JFrame {
 						for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 
 							while (randNumber == entry.getValue().getAccountID()) {
-								idTaken = true;
 								randNumber = rand.nextInt(24) + 1;
 							}
 						}
