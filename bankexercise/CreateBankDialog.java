@@ -9,6 +9,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class CreateBankDialog extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private final static int TABLE_SIZE = 29;
 	private final Random rand = new Random();
 

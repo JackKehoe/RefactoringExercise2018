@@ -4,6 +4,8 @@ import javax.swing.JOptionPane;
 
 public class RecordsMenuMethods extends BankApplication {
 
+	private static final long serialVersionUID = 1L;
+
 	public static void createItem() {
 		new CreateBankDialog(table);
 	}

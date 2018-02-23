@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 
 public class FileMenuMethods extends BankApplication {
 
+	private static final long serialVersionUID = 1L;
+	
 	protected static RandomAccessFile input;
 	protected static RandomAccessFile output;
 	protected static JFileChooser fc;

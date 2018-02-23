@@ -4,22 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
 
-import javax.swing.table.DefaultTableModel;
 
 import net.miginfocom.swing.MigLayout;
 
 public class BankApplication extends JFrame {
 
+
+	private static final long serialVersionUID = 1L;
 	static ArrayList<BankAccount> accountList = new ArrayList<BankAccount>();
 	static HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
 	final static int TABLE_SIZE = 29;

@@ -5,6 +5,8 @@ import javax.swing.JOptionPane;
 
 public class TransactionsMenuMethods extends BankApplication {
 
+	private static final long serialVersionUID = 1L;
+
 	public static void deposit() {
 
 		String accNum = JOptionPane.showInputDialog("Account number to deposit into: ");

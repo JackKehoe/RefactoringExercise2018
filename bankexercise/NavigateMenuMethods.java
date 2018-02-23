@@ -6,6 +6,10 @@ import javax.swing.table.DefaultTableModel;
 
 public class NavigateMenuMethods extends BankApplication {
 
+	private static final long serialVersionUID = 1L;
+
+
+
 	public static void first() {
 
 		if (table.isEmpty()) {
