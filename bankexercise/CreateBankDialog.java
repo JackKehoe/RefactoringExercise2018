@@ -24,9 +24,6 @@ public class CreateBankDialog extends JFrame {
 		table.put(hash, value);
 	}
 
-	// Constructor code based on that for the Create and Edit dialog classes in the
-	// Shapes exercise.
-
 	 private JLabel accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel,
 			overdraftLabel;
 

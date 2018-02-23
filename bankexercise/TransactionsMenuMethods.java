@@ -14,23 +14,16 @@ public class TransactionsMenuMethods extends BankApplication {
 			JOptionPane.showMessageDialog(null, "No accounts, please create an account", "WARNING",
 					JOptionPane.WARNING_MESSAGE);
 		} else {
-
-			if (accNum == null) {
-				JOptionPane.showMessageDialog(null, "No account number entered", "ERROR", JOptionPane.ERROR_MESSAGE);
-			} else {
-				for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
-					if (accNum.equals(entry.getValue().getAccountNumber().trim())) {
-						found = true;
-						String toDeposit = JOptionPane.showInputDialog("Enter Amount to Deposit: ");
-						if (toDeposit == null || (toDeposit != null && ("".equals(toDeposit)))) {
-							JOptionPane.showMessageDialog(null, "No deposit amount entered", "ERROR",
-									JOptionPane.ERROR_MESSAGE);
-						} else if (!found) {
-							JOptionPane.showMessageDialog(null, "Account number " + accNum + " not found.");
-						}
-					}
+			for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
+				if (accNum.equals(entry.getValue().getAccountNumber().trim())) {
+					found = true;
+					String toDeposit = JOptionPane.showInputDialog("Account found, Enter Amount to Deposit: ");
+					entry.getValue().setBalance(entry.getValue().getBalance() + Double.parseDouble(toDeposit));
+					displayDetails(entry.getKey());
 				}
 			}
+			if (!found)
+				JOptionPane.showMessageDialog(null, "Account number " + accNum + " not found.");
 		}
 	}
 
@@ -40,7 +33,7 @@ public class TransactionsMenuMethods extends BankApplication {
 		String toWithdraw = JOptionPane.showInputDialog("Account found, Enter Amount to Withdraw: ");
 
 		if (table.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "No accounts, please create an account", "ERROR",
+			JOptionPane.showMessageDialog(null, "No accounts, please create an account", "WARNING",
 					JOptionPane.WARNING_MESSAGE);
 		} else {
 			for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
@@ -69,7 +62,7 @@ public class TransactionsMenuMethods extends BankApplication {
 
 	public static void calcInterest() {
 		if (table.isEmpty()) {
-			JOptionPane.showMessageDialog(null, "No Accounts selected, please open or create a bank account", "WARNING",
+			JOptionPane.showMessageDialog(null, "No Accounts selected, please create an account", "WARNING",
 					JOptionPane.WARNING_MESSAGE);
 		} else {
 			if (!(interestRate == 0)) {
@@ -82,7 +75,6 @@ public class TransactionsMenuMethods extends BankApplication {
 					}
 				}
 			}
-			JOptionPane.showMessageDialog(null, "No interest rate set", "Warning", JOptionPane.WARNING_MESSAGE);
 		}
 	}
 }
