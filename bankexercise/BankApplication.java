@@ -20,7 +20,8 @@ import net.miginfocom.swing.MigLayout;
 
 public class BankApplication extends JFrame {
 
-	ArrayList<BankAccount> accountList = new ArrayList<BankAccount>();
+	//1.Removed unused arraylist
+
 	static HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
 	private final static int TABLE_SIZE = 29;
 
@@ -40,7 +41,8 @@ public class BankApplication extends JFrame {
 	private JTable jTable;
 	double interestRate;
 
-	int currentItem = 0;
+	//2. no need to set to 0
+	int currentItem;
 
 	boolean openValues;
 
@@ -219,20 +221,7 @@ public class BankApplication extends JFrame {
 			}
 		};
 
-		ActionListener next = new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				saveOpenValues();
-				// No next if at end of list.
-				if (currentItem != (table.size() - 1)) {
-					// Move to next item.
-					currentItem++;
-					while (!table.containsKey(currentItem)) {
-						currentItem++;
-					}
-					displayDetails(currentItem);
-				}
-			}
-		};
+		//3.Removed unused action listener
 
 		ActionListener next1 = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -273,12 +262,10 @@ public class BankApplication extends JFrame {
 				}
 
 				int minKey = Collections.min(keyList);
-				// System.out.println(minKey);
 
 				if (currentItem > minKey) {
 					currentItem--;
 					while (!table.containsKey(currentItem)) {
-						// System.out.println("Current: " + currentItem + ", min key: " + minKey);
 						currentItem--;
 					}
 				}
@@ -377,7 +364,6 @@ public class BankApplication extends JFrame {
 				}
 				frame.setSize(600, 500);
 				frame.add(scrollPane);
-				// frame.pack();
 				frame.setVisible(true);
 			}
 		});
@@ -415,9 +401,7 @@ public class BankApplication extends JFrame {
 					dispose();
 				} else if (answer == JOptionPane.NO_OPTION)
 					dispose();
-				else if (answer == 0)
-					;
-
+				//3.removed unnessecary else
 			}
 		});
 
@@ -486,7 +470,6 @@ public class BankApplication extends JFrame {
 						String toDeposit = JOptionPane.showInputDialog("Account found, Enter Amount to Deposit: ");
 						entry.getValue().setBalance(entry.getValue().getBalance() + Double.parseDouble(toDeposit));
 						displayDetails(entry.getKey());
-						// balanceTextField.setText(entry.getValue().getBalance()+"");
 					}
 				}
 				if (!found)
@@ -498,13 +481,13 @@ public class BankApplication extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String accNum = JOptionPane.showInputDialog("Account number to withdraw from: ");
 				String toWithdraw = JOptionPane.showInputDialog("Account found, Enter Amount to Withdraw: ");
-				boolean found;
 
+				//4. removed unused variable "found and method
+				
 				for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 
 					if (accNum.equals(entry.getValue().getAccountNumber().trim())) {
 
-						found = true;
 
 						if (entry.getValue().getAccountType().trim().equals("Current")) {
 							if (Double.parseDouble(toWithdraw) > entry.getValue().getBalance()
@@ -578,34 +561,35 @@ public class BankApplication extends JFrame {
 		int returnVal = fc.showOpenDialog(null);
 
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			File file = fc.getSelectedFile();
+			//5.Removed unneeded File file
+			fc.getSelectedFile();
 
 		} else {
 		}
 
-		try // open file
+		try
 		{
 			if (fc.getSelectedFile() != null)
 				input = new RandomAccessFile(fc.getSelectedFile(), "r");
-		} // end try
+		}
 		catch (IOException ioException) {
 			JOptionPane.showMessageDialog(null, "File Does Not Exist.");
-		} // end catch
+		} 
 
-	} // end method openFile
+	}
 
 	static String fileToSaveAs = "";
 
 	public static void openFileWrite() {
 		if (fileToSaveAs != "") {
-			try // open file
+			try 
 			{
 				output = new RandomAccessFile(fileToSaveAs, "rw");
 				JOptionPane.showMessageDialog(null, "Accounts saved to " + fileToSaveAs);
-			} // end try
+			} 
 			catch (IOException ioException) {
 				JOptionPane.showMessageDialog(null, "File does not exist.");
-			} // end catch
+			} 
 		} else
 			saveToFileAs();
 	}
@@ -630,29 +614,28 @@ public class BankApplication extends JFrame {
 			} else
 				output = new RandomAccessFile(fc.getSelectedFile(), "rw");
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
 
 	public static void closeFile() {
-		try // close file and exit
+		try 
 		{
 			if (input != null)
 				input.close();
-		} // end try
+		} 
 		catch (IOException ioException) {
 
-			JOptionPane.showMessageDialog(null, "Error closing file.");// System.exit( 1 );
-		} // end catch
-	} // end method closeFile
+			JOptionPane.showMessageDialog(null, "Error closing file.");
+		} 
+	} 
 
 	public static void readRecords() {
 
 		RandomAccessBankAccount record = new RandomAccessBankAccount();
 
-		try // read a record and display
+		try 
 		{
 			while (true) {
 				do {
@@ -675,16 +658,16 @@ public class BankApplication extends JFrame {
 
 				table.put(hash, ba);
 
-			} // end while
-		} // end try
-		catch (EOFException eofException) // close file
+			} 
+		} 
+		catch (EOFException eofException) 
 		{
-			return; // end of file was reached
-		} // end catch
+			return; 
+		}
 		catch (IOException ioException) {
 			JOptionPane.showMessageDialog(null, "Error reading file.");
 			System.exit(1);
-		} // end catch
+		} 
 	}
 
 	public static void saveToFile() {
@@ -717,7 +700,6 @@ public class BankApplication extends JFrame {
 	public static void writeFile() {
 		openFileWrite();
 		saveToFile();
-		// addRecords();
 		closeFile();
 	}
 
