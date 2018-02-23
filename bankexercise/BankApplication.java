@@ -20,7 +20,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class BankApplication extends JFrame {
 
-
+	//1.removed unused arraylist
 	static HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
 	private final static int TABLE_SIZE = 29;
 
