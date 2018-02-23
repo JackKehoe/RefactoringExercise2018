@@ -3,12 +3,9 @@ package bankexercise;
 public class BankAccount {
 
 	private int accountID;
-	private String accountNumber;
-	private String surname;
-	private String firstName;
-	private String accountType;
-	private double balance;
-	private double overdraft;
+	private String accountNumber, surname, firstName, accountType;
+	private double balance, overdraft;
+
 
 	public BankAccount(int accountID, String accountNumber, String surname, String firstName, String accountType,
 			double balance, double overdraft) {
